@@ -1,51 +1,57 @@
-// Esercizio 1
-console.log("ciaooooo")
+var prompt = require('prompt');
 
-// Esercizio2
-let primoNum = 5;
-let secondoNum = 7;
-let terzoNum = 67;
-let quartoNum = 2;
-let quintoNum = 1;
-let somma = primoNum + secondoNum + terzoNum + quartoNum +quintoNum;
-let media = somma/5;
-console.log(`somma ${somma} media ${media}`)
+//
+// Start the prompt
+//
+prompt.start();
+flagUser = true;
+flagPwd = true;
+//
+// Get two properties from the user: username and email
+//
 
-// esercizio3
+script();
 
-let str1 ='lawr';
-let str2 = "sve";
-let val1 = undefined;
-let val2 = null;
-let myNum = 1111;
-console.log(str1, typeof str1);
-console.log(str2, typeof str2);
-console.log(val1, typeof val1);
-console.log(val2, typeof val2);
-console.log(myNum, typeof myNum);
+async function getUser(){
 
-// esercizio4
+    prompt._get(['username'], function (err, result) {
+        if (result.username == "Admin") {
+            falgUser = false;
+            while (flagPwd) {
+                getPwd();
+            }
+        } else if (result.username == "") {
+            console.log("Canceled");
+            flagUser = false;
+        } else {
+            console.log("I don't know you")
 
-let myName = "mario";
-let myAge = 21;
-let js = true;
-console.log(`Il mio nome ${myName} età ${myAge} , so programmare: ${js}`)
+        }
+    })
+}
 
-// esercizio5
+async function getPwd(){
+    await prompt._get(['pwd'], function (err, result2) {
+        if (result2.pwd === "TheMaster") {
+            console.log("Welcome");
+            flagPwd = false;
+        } else if (result2.pwd === "") {
+            console.log("Canceled");
+            flagPwd = false;
+        } else {
+            console.log("Wrong password")
+        }
+    })
+}
 
-let miles = 1762.921;
-let km = miles * 1.60934;
-console.log(`${miles}miles are equal to ${km} kms`)
+async function script(){
+    do {
+        await getUser();
+    }
+    while (flagUser)
+}
+//
+// Log the results.
+//
 
-// esercizio6
 
-let inch = 72;
-let weight = 36;
-let altezza = inch*2.4;
-let altezzaMetri = altezza/100;
-let kg = weight * 2.2046;
-console.log(altezzaMetri, kg);
-let bmi = (kg/ (altezzaMetri ** 2));
-console.log("bmi", bmi);
-
-// esercizio7 
